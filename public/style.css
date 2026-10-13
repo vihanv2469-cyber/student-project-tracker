@@ -1,1 +1,292 @@
 
+/* Student Project Tracker - Minimal Earthy Theme */
+
+:root {
+  color-scheme: light;
+  --background: #f6f4ec;
+  --surface: #fffefa;
+  --surface-soft: #eeefe5;
+  --border: #dedfd1;
+  --text: #343d32;
+  --muted: #747b6c;
+  --sage: #71866a;
+  --sage-dark: #52684d;
+  --sage-light: #e1e9dc;
+  --terracotta: #c27b61;
+  --input-background: #fffefa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 40px 24px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--background);
+}
+
+/* Page header */
+
+header,
+main {
+  width: 100%;
+  max-width: 820px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+header {
+  margin-bottom: 30px;
+  padding: 8px 0 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  line-height: 1.25;
+  font-weight: 750;
+  letter-spacing: -1px;
+  color: var(--sage-dark);
+}
+
+header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* Main sections */
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+section {
+  min-width: 0;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(63, 71, 48, 0.04);
+}
+
+h2 {
+  margin: 0 0 22px;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--sage-dark);
+}
+
+/* Form layout */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--text);
+}
+
+/* Inputs and dropdowns */
+
+input,
+select {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 13px;
+  font: inherit;
+  color: var(--text);
+  background: var(--input-background);
+  border: 1px solid #d3d8ca;
+  border-radius: 8px;
+}
+
+input::placeholder {
+  color: #92988a;
+}
+
+input:hover,
+select:hover {
+  border-color: var(--sage);
+}
+
+input:focus,
+select:focus {
+  border-color: var(--sage-dark);
+  outline: 3px solid rgba(113, 134, 106, 0.2);
+  outline-offset: 2px;
+}
+
+/* Buttons */
+
+button {
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 10px 22px;
+  font: inherit;
+  font-weight: 650;
+  color: #ffffff;
+  background: var(--sage-dark);
+  border: 1px solid var(--sage-dark);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--sage);
+  border-color: var(--sage);
+}
+
+button:active {
+  background: #465b42;
+}
+
+#cancel-button {
+  color: var(--sage-dark);
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+#cancel-button:hover {
+  background: var(--sage-light);
+  border-color: var(--sage);
+}
+
+button[hidden] {
+  display: none;
+}
+
+/* Visible keyboard focus */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--terracotta);
+  outline-offset: 3px;
+}
+
+/* Form messages */
+
+#message {
+  margin: 14px 0 0;
+  color: var(--sage-dark);
+  overflow-wrap: anywhere;
+}
+
+#message:empty {
+  display: none;
+}
+
+/* Project list and empty state */
+
+#empty-state {
+  margin: 0;
+  padding: 20px;
+  color: var(--muted);
+  text-align: center;
+  background: var(--surface-soft);
+  border: 1px dashed #cbd2c0;
+  border-radius: 9px;
+}
+
+#project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#project-list:empty {
+  display: none;
+}
+
+#project-list > li {
+  min-width: 0;
+  padding: 18px;
+  overflow-wrap: anywhere;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--sage);
+  border-radius: 9px;
+}
+
+#project-list > li:focus-within {
+  border-color: var(--sage);
+}
+
+/* Responsive layout for small screens */
+
+@media (max-width: 560px) {
+  body {
+    padding: 24px 14px;
+    font-size: 15px;
+  }
+
+  header {
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    letter-spacing: -0.6px;
+  }
+
+  main {
+    gap: 16px;
+  }
+
+  section {
+    padding: 21px 16px;
+    border-radius: 11px;
+  }
+
+  h2 {
+    margin-bottom: 18px;
+    font-size: 1.2rem;
+  }
+
+  form {
+    gap: 17px;
+  }
+
+  input,
+  select {
+    min-height: 44px;
+  }
+
+  button {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  #empty-state {
+    padding: 16px 12px;
+  }
+}
