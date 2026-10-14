@@ -1,38 +1,80 @@
 
-/* Student Project Tracker - Minimal Earthy Theme */
+/* Student Project Tracker - Dark Glassmorphism Theme */
 
 :root {
-  color-scheme: light;
-  --background: #f6f4ec;
-  --surface: #fffefa;
-  --surface-soft: #eeefe5;
-  --border: #dedfd1;
-  --text: #343d32;
-  --muted: #747b6c;
-  --sage: #71866a;
-  --sage-dark: #52684d;
-  --sage-light: #e1e9dc;
-  --terracotta: #c27b61;
-  --input-background: #fffefa;
+  color-scheme: dark;
+
+  --background: #080b12;
+  --surface: rgba(22, 28, 43, 0.82);
+  --surface-soft: rgba(31, 40, 58, 0.78);
+  --border: rgba(173, 190, 220, 0.22);
+
+  --text: #f4f7ff;
+  --muted: #c0cbe0;
+
+  --sage: #a7b4ff;
+  --sage-dark: #7185ff;
+  --sage-light: rgba(113, 133, 255, 0.2);
+
+  --terracotta: #55e6c1;
+  --input-background: rgba(9, 14, 25, 0.88);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+  background: var(--background);
+}
+
 body {
-  margin: 0;
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
-  padding: 40px 24px;
+  margin: 0;
+  padding: 48px 24px;
+
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: var(--text);
-  background: var(--background);
+
+  background-color: var(--background);
+  background-image:
+    linear-gradient(rgba(125, 145, 190, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 145, 190, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(125, 145, 190, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 145, 190, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px, 12px 12px, 12px 12px;
+  background-position: center top;
 }
 
-/* Page header */
+/* Ambient background glow */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 15% 5%,
+      rgba(94, 112, 255, 0.2),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 90% 45%,
+      rgba(41, 213, 186, 0.12),
+      transparent 35%
+    );
+}
+
+/* Header */
 
 header,
 main {
@@ -54,16 +96,16 @@ h1 {
   line-height: 1.25;
   font-weight: 750;
   letter-spacing: -1px;
-  color: var(--sage-dark);
+  color: #edf0ff;
+  text-shadow: 0 0 25px rgba(113, 133, 255, 0.24);
 }
 
 header p {
   margin: 0;
   color: var(--muted);
-  font-size: 1rem;
 }
 
-/* Main sections */
+/* Glass panels */
 
 main {
   display: flex;
@@ -76,19 +118,28 @@ section {
   padding: 28px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  box-shadow: 0 4px 16px rgba(63, 71, 48, 0.04);
+  border-radius: 18px;
+
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+section:hover {
+  border-color: rgba(139, 156, 255, 0.35);
 }
 
 h2 {
   margin: 0 0 22px;
   font-size: 1.3rem;
   line-height: 1.4;
-  font-weight: 700;
-  color: var(--sage-dark);
+  color: #dce3ff;
 }
 
-/* Form layout */
+/* Form */
 
 form {
   display: flex;
@@ -104,9 +155,9 @@ form > div {
 
 label {
   display: block;
+  color: #edf2ff;
   font-size: 0.95rem;
   font-weight: 650;
-  color: var(--text);
 }
 
 /* Inputs and dropdowns */
@@ -117,69 +168,168 @@ select {
   width: 100%;
   min-height: 46px;
   padding: 11px 13px;
+
   font: inherit;
-  color: var(--text);
+  color: #ffffff;
   background: var(--input-background);
-  border: 1px solid #d3d8ca;
-  border-radius: 8px;
+
+  border: 1px solid rgba(173, 190, 220, 0.28);
+  border-radius: 10px;
+
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 input::placeholder {
-  color: #92988a;
+  color: #b0bad0;
 }
 
 input:hover,
 select:hover {
-  border-color: var(--sage);
+  border-color: #9aaaff;
+  box-shadow: 0 0 12px rgba(113, 133, 255, 0.16);
 }
 
 input:focus,
 select:focus {
-  border-color: var(--sage-dark);
-  outline: 3px solid rgba(113, 134, 106, 0.2);
+  border-color: #a7b4ff;
+  outline: 2px solid rgba(113, 133, 255, 0.45);
   outline-offset: 2px;
+  box-shadow: 0 0 18px rgba(113, 133, 255, 0.2);
 }
 
-/* Buttons */
+select option {
+  color: #ffffff;
+  background: #151c2b;
+}
+
+/* Buttons with mouse-following illumination */
 
 button {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
   align-self: flex-start;
   min-height: 44px;
   padding: 10px 22px;
+
   font: inherit;
-  font-weight: 650;
+  font-weight: 700;
   color: #ffffff;
-  background: var(--sage-dark);
-  border: 1px solid var(--sage-dark);
-  border-radius: 8px;
+
+  background: linear-gradient(135deg, #5268e8, #3549b5);
+  border: 1px solid rgba(190, 200, 255, 0.5);
+  border-radius: 10px;
+
   cursor: pointer;
+
+  box-shadow: 0 4px 15px rgba(76, 93, 220, 0.2);
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
 }
 
+/* The glow moves to the mouse position.
+   JavaScript is not required for this effect. */
+
+
+button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.25) 0,
+    rgba(120, 238, 255, 0.18) 12%,
+    rgba(132, 151, 255, 0.08) 32%,
+    transparent 62%
+  );
+
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+
+/* Outer neon illumination */
+
+
+button::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  z-index: -2;
+  pointer-events: none;
+
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    rgba(87, 224, 255, 0.4),
+    rgba(113, 133, 255, 0.2) 35%,
+    transparent 72%
+  );
+
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 180ms ease;
+}
+
+
 button:hover {
-  background: var(--sage);
-  border-color: var(--sage);
+  color: #ffffff;
+  border-color: #a9f1ff;
+  background: linear-gradient(135deg, #667cff, #4057cf);
+
+  box-shadow:
+    0 0 6px rgba(98, 220, 255, 0.22),
+    0 0 14px rgba(113, 133, 255, 0.22),
+    0 0 24px rgba(113, 133, 255, 0.1);
+
+  transform: translateY(-2px);
+}
+
+
+button:hover::before,
+button:hover::after {
+  opacity: 1;
 }
 
 button:active {
-  background: #465b42;
+  transform: translateY(0) scale(0.98);
 }
 
+/* Cancel button */
+
 #cancel-button {
-  color: var(--sage-dark);
-  background: var(--surface);
-  border-color: var(--border);
+  color: #f1f4ff;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(173, 190, 220, 0.3);
+  box-shadow: none;
 }
 
 #cancel-button:hover {
-  background: var(--sage-light);
-  border-color: var(--sage);
+  color: #ffffff;
+  background: rgba(113, 133, 255, 0.2);
+  border-color: #a9f1ff;
+
+  box-shadow:
+    0 0 10px rgba(98, 220, 255, 0.35),
+    0 0 25px rgba(113, 133, 255, 0.3);
 }
 
 button[hidden] {
   display: none;
 }
 
-/* Visible keyboard focus */
+/* Keyboard focus */
 
 a:focus-visible,
 button:focus-visible,
@@ -189,11 +339,12 @@ select:focus-visible {
   outline-offset: 3px;
 }
 
-/* Form messages */
+/* Status messages */
 
 #message {
   margin: 14px 0 0;
-  color: var(--sage-dark);
+  color: #72f5d2;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 
@@ -201,16 +352,17 @@ select:focus-visible {
   display: none;
 }
 
-/* Project list and empty state */
+/* Empty project list */
 
 #empty-state {
   margin: 0;
   padding: 20px;
-  color: var(--muted);
+  color: #c0cbe0;
   text-align: center;
+
   background: var(--surface-soft);
-  border: 1px dashed #cbd2c0;
-  border-radius: 9px;
+  border: 1px dashed rgba(173, 190, 220, 0.3);
+  border-radius: 12px;
 }
 
 #project-list {
@@ -226,26 +378,102 @@ select:focus-visible {
   display: none;
 }
 
+/* Project cards */
+
 #project-list > li {
   min-width: 0;
   padding: 18px;
   overflow-wrap: anywhere;
-  background: var(--surface);
+
+  background: rgba(27, 35, 53, 0.85);
   border: 1px solid var(--border);
-  border-left: 4px solid var(--sage);
-  border-radius: 9px;
+  border-left: 3px solid #8b9cff;
+  border-radius: 12px;
+
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+#project-list > li:hover {
+  background: rgba(36, 45, 67, 0.95);
+  border-color: rgba(139, 156, 255, 0.45);
 }
 
 #project-list > li:focus-within {
-  border-color: var(--sage);
+  border-color: #a7b4ff;
 }
 
-/* Responsive layout for small screens */
+#project-list h3 {
+  margin: 0 0 6px;
+  color: #f1f4ff;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+#project-list p {
+  margin: 0 0 14px;
+  color: #c0cbe0;
+}
+
+/* Edit and Delete buttons */
+
+#project-list > li button {
+  margin: 0 8px 4px 0;
+}
+
+/* Delete button: red glow follows the cursor */
+
+#project-list > li button:last-child {
+  color: #ffffff;
+  background: linear-gradient(135deg, #a82f4a, #76233e);
+  border-color: rgba(255, 150, 170, 0.45);
+  box-shadow: 0 4px 14px rgba(255, 65, 105, 0.12);
+}
+
+
+#project-list > li button:last-child::before {
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 100, 140, 0.2) 20%,
+    transparent 65%
+  );
+}
+
+#project-list > li button:last-child::after {
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 65, 105, 0.4),
+    rgba(255, 65, 105, 0.15) 38%,
+    transparent 72%
+  );
+}
+
+#project-list > li button:last-child:hover {
+  color: #ffffff;
+  background: linear-gradient(135deg, #d83d61, #9d284b);
+  border-color: #ff9caf;
+
+  box-shadow:
+    0 0 6px rgba(255, 65, 105, 0.25),
+    0 0 15px rgba(255, 65, 105, 0.15);
+}
+
+
+/* Responsive layout */
 
 @media (max-width: 560px) {
   body {
     padding: 24px 14px;
     font-size: 15px;
+
+    background-size:
+      36px 36px,
+      36px 36px,
+      9px 9px,
+      9px 9px;
   }
 
   header {
@@ -264,7 +492,7 @@ select:focus-visible {
 
   section {
     padding: 21px 16px;
-    border-radius: 11px;
+    border-radius: 14px;
   }
 
   h2 {
@@ -281,12 +509,48 @@ select:focus-visible {
     min-height: 44px;
   }
 
-  button {
+  form button {
     width: 100%;
     align-self: stretch;
   }
 
   #empty-state {
     padding: 16px 12px;
+  }
+
+  #project-list > li {
+    padding: 15px;
+  }
+
+  #project-list > li button {
+    width: auto;
+    min-width: 88px;
+    padding: 9px 14px;
+  }
+}
+
+/* Touch devices do not have a persistent mouse hover */
+
+@media (hover: none) {
+  button::before,
+  button::after {
+    display: none;
+  }
+
+  button:active {
+    box-shadow: 0 0 18px rgba(113, 133, 255, 0.5);
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
