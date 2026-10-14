@@ -14,4 +14,4 @@ app.get('/api/health', (req, res) => {
 
 const port = Number(process.env.PORT || 3000);
 
-app.listen(port, () => console.log(`Open http://localhost:${port}`));git add server.js
+app.listen(port, () => console.log(`Open http://localhost:${port}`));
